@@ -1,0 +1,119 @@
+{
+  "name": "todo-modern-stack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "prestart": "npm run -s build",
+    "start": "node dist/server/server.js",
+    "dev": "npm run start",
+    "clean": "rimraf dist",
+    "build": "npm run clean && mkdir dist && babel src -s -D -d dist",
+    "test": "jest --watch",
+    "lint": "esw -w src test",
+    "prod": "next build"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.2",
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^20.0.3",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-module-resolver": "^2.7.1",
+    "babel-plugin-root-import": "^5.1.0",
+    "babel-plugin-wrap-in-js": "^1.1.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.26.0",
+    "dotenv": "^4.0.0",
+    "eslint": "^4.5.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jest": "^20.0.3",
+    "eslint-watch": "^3.1.2",
+    "glob": "^7.1.2",
+    "jest": "^20.0.4",
+    "node-sass": "^4.5.3",
+    "nodemon": "^1.11.0",
+    "normalize.css": "^7.0.0",
+    "postcss-easy-import": "^2.1.0",
+    "postcss-loader": "^2.0.6",
+    "raw-loader": "^0.5.1",
+    "rimraf": "^2.6.1",
+    "sass-loader": "^6.0.6",
+    "superagent": "^3.6.0",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.15.4",
+    "isomorphic-unfetch": "^2.0.0",
+    "next": "^3.0.6",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "babel": {
+    "presets": [
+      "next/babel",
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "babel-plugin-root-import",
+      [
+        "module-resolver",
+        {
+          "root": [
+            "."
+          ],
+          "alias": {
+            "styles": "./styles"
+          },
+          "cwd": "babelrc"
+        }
+      ],
+      [
+        "wrap-in-js",
+        {
+          "extensions": [
+            "css$",
+            "scss$"
+          ]
+        }
+      ]
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          "babel-plugin-root-import"
+        ]
+      }
+    }
+  },
+  "eslintConfig": {
+    "plugins": [
+      "import",
+      "jest"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2017,
+      "sourceType": "module"
+    },
+    "env": {
+      "node": true,
+      "jest": true
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "rules": {
+      "jest/no-focused-tests": 2,
+      "jest/no-identical-title": 2
+    }
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
